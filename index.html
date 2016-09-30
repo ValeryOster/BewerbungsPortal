@@ -178,7 +178,7 @@
                                 <span class="text-beschriftung">Datum der Bewerbung</span>
                             </label>
                             <div class="col-sm-3">
-                                <input type="text" ng-model="firma.datum" class="form-control" id="newinputSuccess3_01" aria-describedby="inputSuccess3Status">
+                                <input type="text" ng-model="datum | date:'dd-MM-yyyy'" class="form-control" id="newinputSuccess3_01" aria-describedby="inputSuccess3Status">
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                                 <span id="newinputSuccess3Status_01" class="sr-only">(success)</span>
                             </div>
@@ -188,7 +188,7 @@
                                 <span class="text-beschriftung">Firma</span>
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" ng-model="firma.name" class="form-control" id="newinputSuccess3_1" aria-describedby="inputSuccess3Status">
+                                <input type="text" ng-model="fname" class="form-control" id="newinputSuccess3_1" aria-describedby="inputSuccess3Status">
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                                 <span id="newinputSuccess3Status_1" class="sr-only">(success)</span>
                             </div>
@@ -198,7 +198,7 @@
                                 <span class="text-beschriftung">Beworben als</span>
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" ng-model="firma.als" class="form-control" id="newinputSuccess3_2" aria-describedby="inputSuccess3Status">
+                                <input type="text" ng-model="als" class="form-control" id="newinputSuccess3_2" aria-describedby="inputSuccess3Status">
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                                 <span id="newinputSuccess3Status_2" class="sr-only">(success)</span>
                             </div>
@@ -208,7 +208,7 @@
                                 <span class="text-beschriftung">Ansprechpartner</span> <span class="text-beschriftung-klein">Name + Funktion</span>
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" ng-model="firma.partner" class="form-control" id="newinputSuccess3_3" aria-describedby="inputSuccess3Status">
+                                <input type="text" ng-model="partner" class="form-control" id="newinputSuccess3_3" aria-describedby="inputSuccess3Status">
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                                 <span id="newinputSuccess3Status_3" class="sr-only">(success)</span>
                             </div>
@@ -218,7 +218,7 @@
                                 <span class="text-beschriftung-klein">Rückfrage geplant am</span>
                             </label>
                             <div class="col-sm-4">
-                                <input type="text" ng-model="firma.ruckfrage" class="form-control" id="newinputSuccess3_4" aria-describedby="inputSuccess3Status">
+                                <input type="text" ng-model="ruckfrage" class="form-control" id="newinputSuccess3_4" aria-describedby="inputSuccess3Status">
                                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                                 <span id="newinputSuccess3Status_4" class="sr-only">(success)</span>
                             </div>
@@ -261,7 +261,7 @@
                         <div class="form-group">
                             <div class = "form-group col-sm-11">
                                 <label class="text-beschriftung">Notizen + Personliche Eindrücke</label>
-                                <textarea class = "form-control" rows = "3" ng-model="firma.notiz"></textarea>
+                                <textarea class = "form-control" rows = "3" ng-model="notiz"></textarea>
                             </div>
                         </div>
                         <div class="form-group">

@@ -47,39 +47,6 @@ app.controller('myCtrl', function ($scope) {
 
 
 app.controller("bTabel", function ($http, $scope, $uibModal, $log) {
-    var bFirmen = [
-        {
-            id:1,
-            datum:"12.07.16",
-            name:"Firma 1",
-            als:"Sofwareentwickler",
-            partner:"Frau Schulz",
-            ruckfrage:"12.12.12",
-            einladung:true,
-            einladungdatum:"12.12.12",
-            notiz:"Ich finde die Firma ist perfect für mich."
-        },{
-            id:2,
-            datum:"12.07.16",
-            name:"Firma 1",
-            als:"Sofwareentwickler",
-            partner:"Frau Schulz",
-            ruckfrage:"12.12.12",
-            einladung:true,
-            einladungdatum:"12.12.12",
-            notiz:"Ich finde die Firma ist perfect für mich."
-        },{
-            id:3,
-            datum:"12.07.16",
-            name:"Firma 1",
-            als:"Sofwareentwickler",
-            partner:"Frau Schulz",
-            ruckfrage:"12.12.12",
-            einladung:true,
-            einladungdatum:"12.12.12",
-            notiz:"Ich finde die Firma ist perfect für mich."
-        },
-    ];
 
     $http.get('http://localhost:63342/BewerbungsPortal/bread.php')
         .success(function (result) {
@@ -165,5 +132,6 @@ app.controller('NewBewerbung', function ($http,$scope) {
             console.log("error");
             console.log(result);
         });
+    $scope.datum = new Date();
 
 });
