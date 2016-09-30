@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Mein BewerbungsPortal</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/ui-bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container" ng-controller="myCtrl">
+    <div class="container">
+        <div class="jumbotron">
+            <h1 align="center">BewerbungsPortal</h1>
+        </div>
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li class="{{switcher1}}"><a href="" ng-click="switchen(1)">Beworben</a></li>
+                <li class="{{switcher2}}"><a href="" ng-click="switchen(2)">Neue Bewerbung</a></li>
+                <li class="{{switcher3}}"><a href="" ng-click="switchen(3)">Links</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade {{activate1}}">
+                    <h3>Tabelle mit Firmen.</h3>
+                    <div ng-controller="bTabel">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Beworben als</th>
+                                    <th>Datum</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="firm in bFirmen">
+                                <tr ng-click="open(firm.id)">
+                                    <th>{{firm.name}}</th>
+                                    <th>{{firm.als}}</th>
+                                    <th>{{firm.datum}}</th>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!--Modal Popup Window -->
+                            <script type="text/ng-template" id="myModalContent.html">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Firm ID: {{firma.id}}</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal">
+                                        <div class="form-group has-feedback form-position-input-field">
+                                            <label class="control-label col-sm-2" for="inputSuccess3_00">
+                                                <span class="text-beschriftung">BewerbsNr.</span>
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" ng-model="firma.id" class="form-control" id="inputSuccess3_00" readonly>
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                                <span id="inputSuccess3Status_00" class="sr-only">(success)</span>
+                                            </div>
+                                            <label class="control-label col-sm-3" for="inputSuccess3_01">
+                                                <span class="text-beschriftung">Datum der Bewerbung</span>
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input type="text" ng-model="firma.datum" class="form-control" id="inputSuccess3_01" aria-describedby="inputSuccess3Status">
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                                <span id="inputSuccess3Status_01" class="sr-only">(success)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-feedback form-position-input-field">
+                                            <label class="control-label col-sm-2" for="inputSuccess3_1">
+                                                <span class="text-beschriftung">Firma</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="firma.name" class="form-control" id="inputSuccess3_1" aria-describedby="inputSuccess3Status">
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                                <span id="inputSuccess3Status_1" class="sr-only">(success)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  has-feedback form-position-input-field">
+                                            <label class="control-label col-sm-2" for="inputSuccess3_2">
+                                                <span class="text-beschriftung">Beworben als</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="firma.als" class="form-control" id="inputSuccess3_2" aria-describedby="inputSuccess3Status">
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                                <span id="inputSuccess3Status_2" class="sr-only">(success)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-feedback form-position-input-field">
+                                            <label class="control-label col-sm-2" for="inputSuccess3_3">
+                                                <span class="text-beschriftung">Ansprechpartner</span> <span class="text-beschriftung-klein">Name + Funktion</span>
+                                            </label>
+                                            <div class="col-sm-9">
+                                                <input type="text" ng-model="firma.partner" class="form-control" id="inputSuccess3_3" aria-describedby="inputSuccess3Status">
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                                <span id="inputSuccess3Status_3" class="sr-only">(success)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-feedback form-position-input-field">
+                                            <label class="control-label col-sm-2" for="inputSuccess3_4">
+                                                <span class="text-beschriftung-klein">Rückfrage geplant am</span>
+                                            </label>
+                                            <div class="col-sm-4">
+                                                <input type="text" ng-model="firma.ruckfrage" class="form-control" id="inputSuccess3_4" aria-describedby="inputSuccess3Status">
+                                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                                <span id="inputSuccess3Status_4" class="sr-only">(success)</span>
+                                            </div>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox">erledigt
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group  has-feedback form-position-input-field">
+                                            <label class="control-label col-sm-2" for="inputSuccess3_5">
+                                    <span class="text-beschriftung">
+                                        Einladung zum Vorstellungsgespräch
+                                    </span>
+                                            </label>
+                                            <div class="radio col-sm-1">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                                    Ja
+                                                </label>
+                                            </div>
+                                            <div class="radio col-sm-1">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                                    Nein
+                                                </label>
+                                            </div>
+                                            <label class="control-label col-sm-2" for="inputSuccess3_5">
+                                    <span class="text-beschriftung-klein">
+                                        Datum + Uhrzeit + Gesprächpartner
+                                    </span>
+                                            </label>
+                                            <div class="col-sm-5">
+                                                <input type="text" class="form-control" id="inputSuccess3_5" aria-describedby="inputSuccess3Status">
+                                                <span class="glyphicon  form-control-feedback" aria-hidden="true"></span>
+                                                <span id="inputSuccess3Status_5" class="sr-only">(success)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class = "form-group col-sm-11">
+                                                <label class="text-beschriftung">Notizen + Personliche Eindrücke</label>
+                                                <textarea class = "form-control" rows = "3" ng-model="firma.notiz"></textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="button" ng-click="ok(firma)">OK</button>
+                                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                                </div>
+                            </script>
+                        <!-- END Modal Popup Window -->
+
+                    </div>
+                </div>
+                <div id="newbewerbung" class="tab-pane fade{{activate2}}" ng-controller="NewBewerbung">
+                    <form class="form-horizontal">
+                        <div class="form-group has-feedback form-position-input-field">
+                            <label class="control-label col-sm-2" for="inputSuccess3_00">
+                                <span class="text-beschriftung">BewerbsNr.</span>
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text" ng-model="newId" class="form-control" id="newinputSuccess3_00" readonly>
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <span id="newinputSuccess3Status_00" class="sr-only">(success)</span>
+                            </div>
+                            <label class="control-label col-sm-3" for="inputSuccess3_01">
+                                <span class="text-beschriftung">Datum der Bewerbung</span>
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text" ng-model="firma.datum" class="form-control" id="newinputSuccess3_01" aria-describedby="inputSuccess3Status">
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <span id="newinputSuccess3Status_01" class="sr-only">(success)</span>
+                            </div>
+                        </div>
+                        <div class="form-group has-feedback form-position-input-field">
+                            <label class="control-label col-sm-2" for="inputSuccess3_1">
+                                <span class="text-beschriftung">Firma</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" ng-model="firma.name" class="form-control" id="newinputSuccess3_1" aria-describedby="inputSuccess3Status">
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <span id="newinputSuccess3Status_1" class="sr-only">(success)</span>
+                            </div>
+                        </div>
+                        <div class="form-group  has-feedback form-position-input-field">
+                            <label class="control-label col-sm-2" for="inputSuccess3_2">
+                                <span class="text-beschriftung">Beworben als</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" ng-model="firma.als" class="form-control" id="newinputSuccess3_2" aria-describedby="inputSuccess3Status">
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <span id="newinputSuccess3Status_2" class="sr-only">(success)</span>
+                            </div>
+                        </div>
+                        <div class="form-group has-feedback form-position-input-field">
+                            <label class="control-label col-sm-2" for="inputSuccess3_3">
+                                <span class="text-beschriftung">Ansprechpartner</span> <span class="text-beschriftung-klein">Name + Funktion</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" ng-model="firma.partner" class="form-control" id="newinputSuccess3_3" aria-describedby="inputSuccess3Status">
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <span id="newinputSuccess3Status_3" class="sr-only">(success)</span>
+                            </div>
+                        </div>
+                        <div class="form-group has-feedback form-position-input-field">
+                            <label class="control-label col-sm-2" for="inputSuccess3_4">
+                                <span class="text-beschriftung-klein">Rückfrage geplant am</span>
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" ng-model="firma.ruckfrage" class="form-control" id="newinputSuccess3_4" aria-describedby="inputSuccess3Status">
+                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <span id="newinputSuccess3Status_4" class="sr-only">(success)</span>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox">erledigt
+                                </label>
+
+                            </div>
+                        </div>
+                        <div class="form-group  has-feedback form-position-input-field">
+                            <label class="control-label col-sm-2" for="inputSuccess3_5">
+                                        <span class="text-beschriftung">
+                                            Einladung zum Vorstellungsgespräch
+                                        </span>
+                            </label>
+                            <div class="radio col-sm-1">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="newoptionsRadios1" value="option1" checked>
+                                    Ja
+                                </label>
+                            </div>
+                            <div class="radio col-sm-1">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="newoptionsRadios2" value="option2">
+                                    Nein
+                                </label>
+                            </div>
+                            <label class="control-label col-sm-2" for="inputSuccess3_5">
+                                        <span class="text-beschriftung-klein">
+                                            Datum + Uhrzeit + Gesprächpartner
+                                        </span>
+                            </label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="newinputSuccess3_5" aria-describedby="inputSuccess3Status">
+                                <span class="glyphicon  form-control-feedback" aria-hidden="true"></span>
+                                <span id="newinputSuccess3Status_5" class="sr-only">(success)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class = "form-group col-sm-11">
+                                <label class="text-beschriftung">Notizen + Personliche Eindrücke</label>
+                                <textarea class = "form-control" rows = "3" ng-model="firma.notiz"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="button" ng-click="ok(firma)">OK</button>
+                            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="menu2" class="tab-pane fade{{activate3}}">
+                    <h3>Links mit Beschreibung</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

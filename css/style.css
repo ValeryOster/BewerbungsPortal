@@ -1,0 +1,40 @@
+.form-position-input-field{
+    margin-top: 15px;
+}
+.text-beschriftung{
+    color: #c7254e;
+    font-size: 17px;
+    padding-top: 0px;
+
+}
+.text-beschriftung-klein{
+    font-size: 12px;
+}
+.form-horizontal .control-label {
+    padding-top: 0px;
+}
+body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > div.modal-body.ng-scope > form > div:nth-child(7) > div{
+    margin-top: 10px;
+    margin-left: -2px;
+}
+#newbewerbung > form > div:nth-child(8) > button.btn.btn-primary{
+    padding: 10px 100px;
+}
+#newbewerbung > form > div:nth-child(8) > button.btn.btn-warning{
+    padding: 10px 100px;
+    color: #100F0F;
+    margin-right: 0px;
+    float: right;
+}
+@media only screen and (max-width: 1200px){
+	
+}
+@media only screen and (max-width: 992px){
+	
+}
+@media only screen and (max-width: 768px){
+	
+}
+@media only screen and (max-width: 480px){
+
+}
