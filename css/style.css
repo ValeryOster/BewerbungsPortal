@@ -23,8 +23,11 @@ body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > div.modal-body.
 #newbewerbung > form > div:nth-child(8) > button.btn.btn-warning{
     padding: 10px 100px;
     color: #100F0F;
-    margin-right: 0px;
+    margin-right: 10%;
     float: right;
+}
+#newbewerbung > form > div:nth-child(7) > div > textarea{
+    width: 102%;
 }
 @media only screen and (max-width: 1200px){
 	
@@ -33,7 +36,13 @@ body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > div.modal-body.
 	
 }
 @media only screen and (max-width: 768px){
-	
+    #newbewerbung > form > div:nth-child(8) > button.btn.btn-warning{
+        margin-right: 0%;
+    }
+    #newbewerbung > form > div:nth-child(7) > div > textarea{
+        width: 96%;
+        margin-left: 2%;
+    }
 }
 @media only screen and (max-width: 480px){
 

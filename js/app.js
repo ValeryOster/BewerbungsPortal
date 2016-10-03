@@ -102,9 +102,6 @@ app.controller('ModalInstanceCtrl', function ($http, $scope, $uibModalInstance ,
 
     $scope.ok = function (bw) {
         $uibModalInstance.close();
-        //console.log("Function OK:");
-        //console.log($scope.firma);
-
 
         $http.post('http://localhost:63342/BewerbungsPortal/bwrite.php', bw)
             .success(function (result) {
@@ -120,7 +117,7 @@ app.controller('ModalInstanceCtrl', function ($http, $scope, $uibModalInstance ,
 
 });
 
-app.controller('NewBewerbung', function ($http,$scope) {
+app.controller('NewBewerbung', function ($http,$scope,$filter) {
 
     $http.get('http://localhost:63342/BewerbungsPortal/getlastid.php')
         .success(function (result) {
@@ -132,6 +129,36 @@ app.controller('NewBewerbung', function ($http,$scope) {
             console.log("error");
             console.log(result);
         });
-    $scope.datum = new Date();
+    $scope.datum = $filter('date')(new Date(), 'dd.MM.yyyy');
+
+    $scope.ok = function () {
+        var newFirmen = { };
+        newFirmen.id = $scope.newId;
+        newFirmen.datum = $scope.datum;
+        newFirmen.name = $scope.fname;
+        newFirmen.als = $scope.als;
+        newFirmen.partner = $scope.partner;
+        newFirmen.ruckfrage = $scope.ruckfrage;
+        newFirmen.einladung = true;
+        newFirmen.einladungdatum = $scope.einladungdatum;
+        newFirmen.notiz = $scope.notiz;
+
+
+
+        $http.post('http://localhost:63342/BewerbungsPortal/newbwrite.php', newFirmen)
+            .success(function (result) {
+                console.log("Succes ->"+result)
+            })
+            .error(function (result) {
+            })
+        $scope.newId ++;
+        $scope.fname="";
+        $scope.als="";
+        $scope.partner="";
+        $scope.ruckfrage="";
+        $scope.einladungdatum="";
+        $scope.notiz="";
+    }
+
 
 });
