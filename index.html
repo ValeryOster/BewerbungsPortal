@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html lang="en" ng-app="app">
 <head>
     <title>Mein BewerbungsPortal</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootsrap-datetimepicker.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/angular.js"></script>
     <script src="js/app.js"></script>
     <script src="js/ui-bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.js"></script>
+    <script src="js/angular-eonasdan-datetimepicker.js"></script>
 </head>
 <body>
 
@@ -51,6 +55,12 @@
                             <script type="text/ng-template" id="myModalContent.html">
                                 <div class="modal-header">
                                     <h3 class="modal-title">Firm ID: {{firma.id}}</h3>
+                                    <select class="">
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+
                                 </div>
                                 <div class="modal-body">
                                     <form class="form-horizontal">
@@ -163,7 +173,7 @@
 
                     </div>
                 </div>
-                <div id="newbewerbung" class="tab-pane fade{{activate2}}" ng-controller="NewBewerbung">
+                <div id="newbewerbung" class="tab-pane fade{{activate2}}" ng-controller="NewBewerbung as vm">
                     <form class="form-horizontal">
                         <div class="form-group has-feedback form-position-input-field">
                             <label class="control-label col-sm-2" for="inputSuccess3_00">
@@ -253,9 +263,12 @@
                                         </span>
                             </label>
                             <div class="col-sm-5">
-                                <input type="text" ng-model="einladungdatum" class="form-control" id="newinputSuccess3_5" aria-describedby="inputSuccess3Status">
-                                <span class="glyphicon  form-control-feedback" aria-hidden="true"></span>
-                                <span id="newinputSuccess3Status_5" class="sr-only">(success)</span>
+                                <div class="input-group" datetimepicker ng-model="vm.date" options="vm.options">
+                                    <input type="text" class="form-control"/>
+                                            <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -270,8 +283,17 @@
                         </div>
                     </form>
                 </div>
-                <div id="menu2" class="tab-pane fade{{activate3}}">
+                <div id="menu2" class="tab-pane fade{{activate3}}" ng-controller="Linklist as vm">
                     <h3>Links mit Beschreibung</h3>
+
+                    <div class="input-group" datetimepicker ng-model="vm.date" options="vm.options">
+                        <input type="text" class="form-control"/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+
+
                 </div>
             </div>
         </div>

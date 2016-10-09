@@ -1,5 +1,5 @@
 
-var app = angular.module('app',['ui.bootstrap']);
+var app = angular.module('app',['ui.bootstrap','ae-datetimepicker']);
 
 app.controller('myCtrl', function ($scope) {
 
@@ -131,9 +131,14 @@ app.controller('NewBewerbung', function ($http,$scope,$filter) {
         });
     $scope.datum = $filter('date')(new Date(), 'dd.MM.yyyy');
 
+    var vm = this;
+    vm.date = moment();
+    vm.options = {format: 'DD.MM.YYYY   HH:mm', showClear: true};
+
     $scope.ok = function () {
         var newFirmen = { };
         newFirmen.id = $scope.newId;
+        newFirmen.status = $scope.status;
         newFirmen.datum = $scope.datum;
         newFirmen.name = $scope.fname;
         newFirmen.als = $scope.als;
@@ -152,6 +157,7 @@ app.controller('NewBewerbung', function ($http,$scope,$filter) {
             .error(function (result) {
             })
         $scope.newId ++;
+        $scope.status = "";
         $scope.fname="";
         $scope.als="";
         $scope.partner="";
@@ -162,3 +168,10 @@ app.controller('NewBewerbung', function ($http,$scope,$filter) {
 
 
 });
+
+app.controller('Linklist',function ($http,$scope,$filter){
+    var vm = this;
+    vm.date = moment();
+    vm.options = {format: 'DD.MM.YYYY HH:mm', showClear: true};
+
+})
