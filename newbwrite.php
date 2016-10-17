@@ -5,8 +5,11 @@ $myfile = file_get_contents($file);
 $localjson = json_decode($myfile, true);
 
 
+
 $txt = file_get_contents("php://input");
 $txt = json_decode($txt,true);
+
+echo $txt;
 
 array_push($localjson, $txt);
 

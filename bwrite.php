@@ -22,8 +22,9 @@ foreach ($localjson as $firms=>$values){
         $localjson[$firms]["partner"] = $txt["partner"];
         $localjson[$firms]["ruckfrage"] = $txt["ruckfrage"];
         $localjson[$firms]["einladung"] = $txt["einladung"];
-        $localjson[$firms]["einladungdatum"] = $txt["einladungdatum"];
+        $localjson[$firms]["einladungZeit"] = $txt["einladungZeit"];
         $localjson[$firms]["notiz"] = $txt["notiz"];
+        $localjson[$firms]["status"] = $txt["status"];
     }
 }
 

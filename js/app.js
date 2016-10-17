@@ -67,6 +67,7 @@ app.controller("bTabel", function ($http, $scope, $uibModal, $log) {
         angular.forEach($scope.bFirmen,function (value) {
             if(value.id == $scope.lookId)
             {
+                console.log(value)
                 $scope.firms = value;
             }
 
@@ -94,23 +95,37 @@ app.controller("bTabel", function ($http, $scope, $uibModal, $log) {
 });
 
 
-
+//Modalwindowlistener
 app.controller('ModalInstanceCtrl', function ($http, $scope, $uibModalInstance , items) {
 
     $scope.firma = items;
 
+    //DataTime picker and his formater
+    $scope.vm = this;
+    $scope.vm.date = moment($scope.firma.einladungZeit, 'DD.MM.YYYY   HH:mm');
+    $scope.vm.options = {format: 'DD.MM.YYYY   HH:mm', showClear: true};
 
+    console.log($scope.vm);
+    //Listener for OK-button
     $scope.ok = function (bw) {
         $uibModalInstance.close();
 
+        bw.einladungZeit = $scope.vm.date;
+
+        console.log("After ok");
+        console.log(bw.einladungZeit);
+
+
+        //Send a firma-information to backend
         $http.post('http://localhost:63342/BewerbungsPortal/bwrite.php', bw)
             .success(function (result) {
-                //console.log(result)
+                console.log(result)
             })
             .error(function (result) {
             })
     };
 
+    //Listener for Cancel-button
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
@@ -119,6 +134,7 @@ app.controller('ModalInstanceCtrl', function ($http, $scope, $uibModalInstance ,
 
 app.controller('NewBewerbung', function ($http,$scope,$filter) {
 
+    //Get last valid ID to make a one new for frondend newBewerbung
     $http.get('http://localhost:63342/BewerbungsPortal/getlastid.php')
         .success(function (result) {
             //console.log("succes");
@@ -129,33 +145,41 @@ app.controller('NewBewerbung', function ($http,$scope,$filter) {
             console.log("error");
             console.log(result);
         });
+
+    //Date for "Datum der Bewerbung"
     $scope.datum = $filter('date')(new Date(), 'dd.MM.yyyy');
 
+    //DataTime picker and his formater
     var vm = this;
     vm.date = moment();
     vm.options = {format: 'DD.MM.YYYY   HH:mm', showClear: true};
 
+    console.log(vm);
+    //If "OK"-button pressed, save all infro in a array
     $scope.ok = function () {
+
         var newFirmen = { };
         newFirmen.id = $scope.newId;
-        newFirmen.status = $scope.status;
         newFirmen.datum = $scope.datum;
         newFirmen.name = $scope.fname;
         newFirmen.als = $scope.als;
         newFirmen.partner = $scope.partner;
         newFirmen.ruckfrage = $scope.ruckfrage;
         newFirmen.einladung = true;
-        newFirmen.einladungdatum = $scope.einladungdatum;
+        newFirmen.einladungZeit = $scope.einladungZeit;
         newFirmen.notiz = $scope.notiz;
+        newFirmen.status = "Warten";
 
+        console.log(newFirmen);
 
-
+        //Write new Bewerbung in json File
         $http.post('http://localhost:63342/BewerbungsPortal/newbwrite.php', newFirmen)
             .success(function (result) {
                 console.log("Succes ->"+result)
             })
             .error(function (result) {
             })
+        //Delete all Information after it is writen to backend.
         $scope.newId ++;
         $scope.status = "";
         $scope.fname="";

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootsrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/angular.js"></script>
@@ -15,6 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="js/bootstrap-datetimepicker.js"></script>
     <script src="js/angular-eonasdan-datetimepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
 </head>
 <body>
 
@@ -54,12 +57,16 @@
                         <!--Modal Popup Window -->
                             <script type="text/ng-template" id="myModalContent.html">
                                 <div class="modal-header">
-                                    <h3 class="modal-title">Firm ID: {{firma.id}}</h3>
-                                    <select class="">
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
-                                    </select>
+                                        <h3 class="modal-title">Firm ID: {{firma.id}}</h3>
+                                        <div class="col-md-5 col-md-offset-7" ng-model="firma.status" style="background-color: {{firma.selectcolor}}">
+                                            <select class="form-control">
+                                                <option>Warten</option>
+                                                <option>Absage</option>
+                                                <option>Vorstellungsgespräch</option>
+                                            </select>
+                                        </div>
+
+
 
                                 </div>
                                 <div class="modal-body">
@@ -128,10 +135,10 @@
                                             </div>
                                         </div>
                                         <div class="form-group  has-feedback form-position-input-field">
-                                            <label class="control-label col-sm-2" for="inputSuccess3_5">
-                                    <span class="text-beschriftung">
-                                        Einladung zum Vorstellungsgespräch
-                                    </span>
+                                            <label class="control-label col-sm-2" for="inputSuccess3_4">
+                                            <span class="text-beschriftung">
+                                                Einladung zum Vorstellungsgespräch
+                                            </span>
                                             </label>
                                             <div class="radio col-sm-1">
                                                 <label>
@@ -145,15 +152,19 @@
                                                     Nein
                                                 </label>
                                             </div>
-                                            <label class="control-label col-sm-2" for="inputSuccess3_5">
-                                    <span class="text-beschriftung-klein">
-                                        Datum + Uhrzeit + Gesprächpartner
-                                    </span>
+                                            <label class="control-label col-sm-2" for="inputSuccess3_4">
+                                                <span class="text-beschriftung-klein">
+                                                    Datum + Uhrzeit
+                                                </span>
                                             </label>
                                             <div class="col-sm-5">
-                                                <input type="text" class="form-control" id="inputSuccess3_5" aria-describedby="inputSuccess3Status">
-                                                <span class="glyphicon  form-control-feedback" aria-hidden="true"></span>
-                                                <span id="inputSuccess3Status_5" class="sr-only">(success)</span>
+                                                <div class="input-group"
+                                                      datetimepicker ng-model="vm.date" options="vm.options">
+                                                    <input type="text" class="form-control"/>
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -240,10 +251,10 @@
                             </div>
                         </div>
                         <div class="form-group  has-feedback form-position-input-field">
-                            <label class="control-label col-sm-2" for="inputSuccess3_5">
-                                        <span class="text-beschriftung">
-                                            Einladung zum Vorstellungsgespräch
-                                        </span>
+                            <label class="control-label col-sm-2" for="inputSuccess3_4">
+                                <span class="text-beschriftung">
+                                    Einladung zum Vorstellungsgespräch
+                                </span>
                             </label>
                             <div class="radio col-sm-1">
                                 <label>
@@ -257,17 +268,17 @@
                                     Nein
                                 </label>
                             </div>
-                            <label class="control-label col-sm-2" for="inputSuccess3_5">
+                            <label class="control-label col-sm-2" for="inputSuccess3_4">
                                         <span class="text-beschriftung-klein">
-                                            Datum + Uhrzeit + Gesprächpartner
+                                            Datum + Uhrzeit
                                         </span>
                             </label>
                             <div class="col-sm-5">
                                 <div class="input-group" datetimepicker ng-model="vm.date" options="vm.options">
-                                    <input type="text" class="form-control"/>
-                                            <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
+                                    <input type="text" class="form-control" ng-model="einladungZeit"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
