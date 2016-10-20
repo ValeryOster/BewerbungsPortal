@@ -55,8 +55,8 @@ app.controller("bTabel", function ($http, $scope, $uibModal, $log) {
             $scope.bFirmen = result;
         })
         .error(function (result) {
-            console.log("error");
-            console.log(result);
+            //console.log("error");
+            //console.log(result);
         });
 
 
@@ -67,7 +67,7 @@ app.controller("bTabel", function ($http, $scope, $uibModal, $log) {
         angular.forEach($scope.bFirmen,function (value) {
             if(value.id == $scope.lookId)
             {
-                console.log(value)
+                //console.log(value)
                 $scope.firms = value;
             }
 
@@ -96,7 +96,7 @@ app.controller("bTabel", function ($http, $scope, $uibModal, $log) {
 
 
 //Modalwindowlistener
-app.controller('ModalInstanceCtrl', function ($http, $scope, $uibModalInstance , items) {
+app.controller('ModalInstanceCtrl', function ($http, $scope, $uibModalInstance, items) {
 
     $scope.firma = items;
 
@@ -105,24 +105,32 @@ app.controller('ModalInstanceCtrl', function ($http, $scope, $uibModalInstance ,
     $scope.vm.date = moment($scope.firma.einladungZeit, 'DD.MM.YYYY   HH:mm');
     $scope.vm.options = {format: 'DD.MM.YYYY   HH:mm', showClear: true};
 
-    console.log($scope.vm);
     //Listener for OK-button
     $scope.ok = function (bw) {
         $uibModalInstance.close();
 
         bw.einladungZeit = $scope.vm.date;
 
-        console.log("After ok");
-        console.log(bw.einladungZeit);
-
-
         //Send a firma-information to backend
         $http.post('http://localhost:63342/BewerbungsPortal/bwrite.php', bw)
+            .success(function (result) {
+                //console.log(result)
+            })
+            .error(function (result) {
+            })
+    };
+
+    $scope.delete = function (bw) {
+        $uibModalInstance.close();
+
+        //Send a firma-information to backend for Deleting
+        $http.post('http://localhost:63342/BewerbungsPortal/bwdelete.php', bw)
             .success(function (result) {
                 console.log(result)
             })
             .error(function (result) {
             })
+
     };
 
     //Listener for Cancel-button
@@ -154,7 +162,6 @@ app.controller('NewBewerbung', function ($http,$scope,$filter) {
     vm.date = moment();
     vm.options = {format: 'DD.MM.YYYY   HH:mm', showClear: true};
 
-    console.log(vm);
     //If "OK"-button pressed, save all infro in a array
     $scope.ok = function () {
 
